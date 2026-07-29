@@ -16,3 +16,10 @@
 - git clone
 - git push
 - git pull
+
+##Git Workflow
+
+1. Check changes with 'git status'.
+2. Add changes with 'git add'.
+3. Save changes with 'git commit'.
+4. Upload changes with 'git push'.
