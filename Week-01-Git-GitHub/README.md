@@ -1,4 +1,4 @@
-# Week 01 Git and Github
+# Git and Github
 
 ## What I Learned
 
