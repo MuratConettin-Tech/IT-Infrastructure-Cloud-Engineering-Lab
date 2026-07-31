@@ -30,10 +30,10 @@ Windows Server 2025
 
 ### Hyper-V Manager
 
-![Hyper-V Manager](Screenshots/001-hyperv-manager.png)
+![Hyper-V Manager](Screenshots/01-hyperv-manager.png)
 
 External Virtual Switch
 
-![Virtual Switch](002-virtual-switch.png)
+![Virtual Switch](02-virtual-switch.png)
 
 
