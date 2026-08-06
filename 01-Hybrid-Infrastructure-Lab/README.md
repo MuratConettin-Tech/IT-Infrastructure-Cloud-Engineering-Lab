@@ -1,5 +1,5 @@
 <─── Back to Main Repository:
-[IT Infrastructure & Cloud Engineering Lab](../README.md)
+[IT Infrastructure Cloud Engineering Lab](../README.md)
 
 # 01-Hybrid-Infrastructure-Lab
 
@@ -107,6 +107,7 @@ _______________________________________________________________
 
 ### Phase 1 — Local Infrastructure
 
+* Enabled Hyper-V on host machine
 * Configure Hyper-V
 * Create virtual network
 * Deploy DC01
@@ -208,7 +209,7 @@ _______________________________________________________________
 
 ## Project Context
 
-This lab is part of the broader IT Infrastructure & Cloud Engineering roadmap.
+This lab is part of the broader IT Infrastructure Cloud Engineering roadmap.
 
 Related Objectives:
 - Infrastructure Virtualization
@@ -253,6 +254,12 @@ _______________________________________________________________
 Implementation details, architecture decisions, configuration notes and relevant screenshots will be documented throughout the project.
 
 Screenshots are included selectively to demonstrate important configuration and implementation stages.
+
+### Project Structure
+
+- /docs → Detailed technical notes and explanations
+- /scripts → Automation and configuration scripts
+- /screenshots → Proof of implementation
 
 
 _______________________________________________________________

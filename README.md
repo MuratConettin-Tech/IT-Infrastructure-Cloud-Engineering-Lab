@@ -1,4 +1,4 @@
-# IT Infrastructure & Cloud Engineering Lab
+# IT Infrastructure Cloud Engineering Lab
 
 A hands-on infrastructure engineering portfolio focused on modern enterprise infrastructure, cloud platforms, automation, Infrastructure as Code, containers, Kubernetes, DevOps and SRE practices.
 
