@@ -1,197 +1,247 @@
-# IT-Infrastructure-Labs
+# IT Infrastructure & Cloud Engineering Lab
 
-## Overview
+A hands-on infrastructure engineering portfolio focused on modern enterprise infrastructure, cloud platforms, automation, Infrastructure as Code, containers, Kubernetes, DevOps and SRE practices.
 
-Welcome to my IT Infrastructure Labs repository.
+This repository contains practical projects designed to simulate real-world infrastructure engineering scenarios rather than isolated technology exercises.
 
-This repository documents my hands-on journey to became a modern System Engineer, Infrastructure Engineer, DevOps Engineer and Site Reliability Engineer (SRE).
+_______________________________________________________________
 
-The goal of this project is not only to learn technologies but also to build a real enterprise-like home lab and document every step professionally.
+## Prerequisites
 
----
+Before starting this lab:
+
+- Basic knowledge of networking (IP, DNS)
+- Basic Windows / Linux usage
+- Hyper-V enabled on host machine
+- Minimum 16GB RAM recommended
+
+_______________________________________________________________
+
+## What You Will Build
+
+By the end of this lab, you will have:
+
+- Active Directory domain
+- Linux server running Docker
+- Internal virtual network
+- Hybrid-ready infrastructure base
+
+_______________________________________________________________
 
 ## Objectives
 
-- Build a complate enterprise home lab
-- Learn Microsoft infrastructure technologies
-- Gain practical experience with cloud platforms
-- Automate administration tasks using PowerShell
-- Laearn Infrastructure as Code (IaC)
-- Build a professional GitHub portfolio
-- Document every lab with screenshots and explanations
+* Modernize and extend enterprise infrastructure skills
+* Build practical Cloud and Hybrid Cloud experience
+* Automate infrastructure and operational tasks
+* Manage infrastructure using Infrastructure as Code
+* Design and operate containerized workloads
+* Build Kubernetes-based platforms
+* Implement CI/CD automation
+* Apply monitoring, observability and SRE practices
+* Document architecture, implementation and operational decisions
 
----
+_______________________________________________________________
 
-## Technologies
+## Technology Areas
 
-### Version Control
-- Git
-- Github
+### Infrastructure & Virtualization
 
-### Windows Administration
+* Hyper-V
+* Windows Server
+* Linux
+* Active Directory / DNS
+* Virtual Networking
 
-- Windows Server 2025
-- Active Directory Domain Services (AD DS)
-- DNS
-- DHCP
-- Group Policy (GPO)
-- File Server
-- Hyper-V
+### Cloud
 
-
-### Microsoft Cloud
-- Microsoft Azure
-- Microsoft Entra ID
-- Azure Arc
-- Azure Virtual Machines
-- Azure Virtual Networks
-- Azure Storage
+* Microsoft Azure
+* Azure Virtual Network
+* Azure Compute
+* Azure Storage
+* Microsoft Entra ID
+* Azure Monitor
+* Azure Arc
+* Hybrid Cloud
 
 ### Automation
-- Powershell 
-- Powershell Remoting
-- Powershell Scripting
 
-### Virtualization
-- Hyper-V
-- Vmware
-- Ubuntu Server 
+* PowerShell
+* Bash
+* REST APIs
+* Infrastructure Automation
+
+### Infrastructure as Code
+
+* Terraform
+* Azure Bicep
+* Azure Resource Manager (ARM) concepts
 
 ### Containers
-- Docker
-- Docker Compose
-- Kubernetes
-- Terraform
+
+* Docker
+* Docker Compose
+* Container Registry
+
+### Kubernetes
+
+* Kubernetes Architecture
+* Deployments
+* Services
+* ConfigMaps
+* Secrets
+* Ingress
+* Persistent Volumes
+* Helm
+* Kubernetes Networking
+* High Availability
 
 ### DevOps
-- Github Actions
-- Azure DevOps
-- CI/CD
 
-### Monitoring
-- Windows Event Logs
-- Performance Monitor
-- Azure Monitor
+* Git
+* GitHub
+* GitHub Actions
+* CI/CD
+* Automated Testing
+* Container Build & Deployment
 
----
+### SRE & Operations
+
+* Monitoring
+* Logging
+* Observability
+* Metrics
+* Alerting
+* SLI / SLO / SLA
+* Availability
+* Reliability
+* Incident Management
+* RTO / RPO
+* Disaster Recovery
+* Capacity Planning
+
+_______________________________________________________________
+
+## Architecture Vision
+
+This repository evolves towards a fully integrated platform:
+
+On-Prem → Hybrid → Cloud → Kubernetes → SRE
+
+Final architecture includes:
+- Hybrid networking
+- Infrastructure as Code
+- Container orchestration
+- Observability stack
+
+_______________________________________________________________
 
 ## Repository Structure
 
-...
+- [01 - Hybrid Infrastructure Lab](./01-Hybrid-Infrastructure-Lab)
+- [02 - PowerShell Infrastructure Automation](./02-PowerShell-Infrastructure-Automation)
+
+_______________________________________________________________
+
+## Project Roadmap
+
+| #  | Project                          | Focus Area                | Status       |
+|----|----------------------------------|---------------------------|--------------|
+| 01 | Hybrid Infrastructure Lab        | On-Prem + Cloud           | In Progress  |
+| 02 | PowerShell Automation            | Automation                | Planned      |
+| 03 | Azure Platform                   | Cloud                     | Planned      |
+| 04 | Terraform IaC                    | Infrastructure as Code    | Planned      |
+| 05 | Docker Platform                  | Containers                | Planned      |
+| 06 | Kubernetes Platform              | Orchestration             | Planned      |
+| 07 | CI/CD Pipelines                  | DevOps                    | Planned      |
+| 08 | Monitoring & Observability       | SRE                       | Planned      |
+| 09 | Reliability Engineering          | SRE                       | Planned      |
+| 10 | Enterprise Capstone              | End-to-End Platform       | Planned      |
+
+_______________________________________________________________
+
+## Repository Structure
 
 IT-Infrastructure-Labs
 
-- Week-01-Git-GitHub
-- Week-02-PowerShellAutomation
-- Week-03-Hyper-V
-- Week-04-Windows-Server
-- Week-05-Active-Directory
-- Week-06-DNS
-- Week-07-Group Policy
-- Week-08-Azure
-- Week-09-Terraform
-- Week-10-Docker
-- Week-11-Kubernetes
-- Week-12-CI-CD
-...
+- 01-Hybrid-Infrastructure-Lab
+- 02-PowerShell-Infrastructure-Automation
+- 03-Azure-Infrastructure-Platform
+- 04-Terraform-Infrastructure-as-Code
+- 05-Docker-Containerization
+- 06-Kubernetes-Platform
+- 07-CI-CD-GitHub-Actions
+- 08-Monitoring-Observability
+- 09-SRE-Reliability
+- 10-Enterprise-Capstone
 
----
+______________________________________________________________
 
-## Learning Roadmap
+## Engineering Approach
 
-- Week-01	Git-GitHub 			Complated
-- Week-02	PowerShellAutomation		Complated
-- Week-03	Hyper-V				In Progress
-- Week-04	Windows-Server			Planned
-- Week-05	Active-Directory		Planned
-- Week-06	DNS				Planned
-- Week-07	Group Policy			Planned
-- Week-08	Azure				Planned
-- Week-09	Terraform			Planned
-- Week-10	Docker				Planned
-- Week-11	Kubernetes			Planned
-- Week-12	CI-CD				Planned
+Each project follows an engineering workflow:
 
----
+Problem
+   ↓
+Requirements
+   ↓
+Architecture
+   ↓
+Implementation
+   ↓
+Automation
+   ↓
+Testing
+   ↓
+Monitoring
+   ↓
+Documentation
+   ↓
+Lessons Learned
 
-## Lab Documentation
+Projects focus on understanding why a technology is used, how it integrates with other infrastructure components, and how it can be operated reliably in production.
 
-Each week's folder contains:
+_______________________________________________________________
 
-- Detailed README
-- Installation steps
-- Configrations notes
-- PowerShell Scripts
-- Screenshots
-- Lessons learned
+## Documentation Standard
 
----
+Each project may contain:
 
-## Home Lab Enviroment
+* Architecture diagrams
+* Infrastructure configuration
+* Automation scripts
+* Infrastructure as Code
+* Deployment manifests
+* Screenshots where useful
+* Testing results
+* Monitoring information
+* Operational considerations
+* Lessons learned
 
-### Host Machine
+Screenshots are included only when they provide useful evidence of implementation.
 
-- Windows 10 Pro 22H2 
-- Intel Core i7-6600u
-- 16 GB RAM
-- 512 GB SSD
+_______________________________________________________________
 
-## Virtualization
+## Key Capabilities
 
-- Microsoft Hyper-V
+- Design and build hybrid infrastructure environments
+- Deploy and manage cloud-native workloads on Azure
+- Automate infrastructure using Terraform and PowerShell
+- Build and operate Kubernetes clusters
+- Implement CI/CD pipelines with GitHub Actions
+- Apply SRE practices for reliability and scalability
 
-### Planned Virtual Machines
+_______________________________________________________________
 
-| VM | Purpose
-| DC01 | Active Directory Domain Controller |
-| Ubuntu01 | Docker & kubernetes |
-| Client01 | Windows Client |
+## Engineering Goals
 
----
+By completing this roadmap, the objective is to demonstrate practical capability across:
 
-## Project Goals
+Infrastructure → Cloud → Automation → IaC → Containers → Kubernetes → CI/CD → Observability → SRE
 
-By the end this project I aim to confidently deploy, configure and manage enterprise infrastructure including:
+The final goal is to combine these technologies into an integrated enterprise-style platform rather than treating each technology as an isolated subject.
 
-- Windows Server
-- Active Directory
-- Azure
-- PowerShell Automation
-- Docker
-- Kubernetes
-- Terraform
-- GitHub Actions
-- Hybrid Cloud Infrastructure
+_______________________________________________________________
 
----
+## Status
 
-## Notes
-
-This repository is continuously updated as complate new labs and technologies.
-
-Every lab is built from scratch, tested, documented and  committed to GitHub as part of my learning journey.
-
----
-
-## Author
-
-**Murat Cönettin**
-
-IT Infrastructure | System Administration | Cloud | DevOps | SRE Learning  Journey | Engineer
-
-
-Each topic will include:
-- Learning notes
-- Hands-on lab documentation
-- Configration files
-- Scripts and automation examples
-- Architecture diagrams
-
-## Current Progress
-- Week 01: Git and GitHub - In Progress
-
-## About
-I am an experienced IT Infrastructure professional focused on improving my skills in cloud technologies, automation, Infrastructure as Code, Containers, and DevOps Practices.
-
-
-
+This repository is continuously evolving as new infrastructure projects are designed, implemented, tested and documented.
