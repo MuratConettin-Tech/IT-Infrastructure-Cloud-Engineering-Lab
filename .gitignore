@@ -1,0 +1,54 @@
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+*.bak
+*.old
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+
+# PowerShell temporary files
+*.clixml
+
+# Credentials and secrets
+*.key
+*.pem
+*.pfx
+*.p12
+*.cer
+*.crt
+
+# Environment files
+.env
+.env.*
+secrets/
+credentials/
+
+# Virtual machine files
+*.vhd
+*.vhdx
+*.avhd
+*.avhdx
+*.vsv
+*.vmcx
+*.vmrs
+*.vmgs
+
+# ISO images
+*.iso
+
+# Terraform local state
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# OS / temporary backup files
+*~
