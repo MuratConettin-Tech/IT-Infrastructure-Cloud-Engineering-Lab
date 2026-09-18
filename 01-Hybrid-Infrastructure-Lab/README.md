@@ -81,75 +81,83 @@ _______________________________________________________________
 
 ## Current Architecture
 
+```text
                     Local Network
                          │
-                  192.168.1.1
-                     Gateway
+                   192.168.1.1
+                      Gateway
                          │
                          │
-               Windows 10 Pro Host
+                Windows 10 Pro Host
                          │
-                       Hyper-V
+                      Hyper-V
                          │
-               Hyper-V Virtual Switch
+                Hyper-V Virtual Switch
                          │
-              ┌──────────┴──────────┐
-              │                     │
-            DC01                 Ubuntu01
-       Windows Server 2025      Ubuntu Server
-        192.168.1.10/24        192.168.1.13/24
-              │                     │
-         AD DS + DNS                SSH
-              │                     │
-              └──── Internal DNS ───┘
-                   192.168.1.10
+               ┌─────────┴─────────┐
+               │                   │
+             DC01               Ubuntu01
+      Windows Server 2025      Ubuntu Server
+        192.168.1.10/24       192.168.1.13/24
+               │                   │
+          AD DS + DNS              SSH
+               │                   │
+               └─── Internal DNS ──┘
+                    192.168.1.10
+```
 
 ### DC01
 
-Hostname        : DC01
-Operating System: Windows Server 2025
-IPv4 Address    : 192.168.1.10/24
-Default Gateway : 192.168.1.1
-DNS Server      : 192.168.1.10
-Domain          : Conettin.lab
-NetBIOS         : CONETTIN
-Roles           : AD DS / DNS
+```text
+Hostname         : DC01
+Operating System : Windows Server 2025
+IPv4 Address     : 192.168.1.10/24
+Default Gateway  : 192.168.1.1
+DNS Server       : 192.168.1.10
+Domain           : Conettin.lab
+NetBIOS          : CONETTIN
+Roles            : AD DS / DNS
+```
 
 ### Ubuntu01
 
-Hostname        : Ubuntu01
-Operating System: Ubuntu Server
-Interface       : eth0
-IPv4 Address    : 192.168.1.13/24
-Default Gateway : 192.168.1.1
-DNS Server      : 192.168.1.10
-Remote Access   : SSH
+```text
+Hostname         : Ubuntu01
+Operating System : Ubuntu Server
+Interface        : eth0
+IPv4 Address     : 192.168.1.13/24
+Default Gateway  : 192.168.1.1
+DNS Server       : 192.168.1.10
+Remote Access    : SSH
+```
 
 _______________________________________________________________
 
 ## Target architecture:
 
+```text
                          Microsoft Azure
                                │
-                          Azure VNet
+                           Azure VNet
                                │
-                      Hybrid Connectivity
+                       Hybrid Connectivity
                                │
-                ┌──────────────┴──────────────┐
-                │                             │
-           On-Premises                    Azure VM
-                │
+                 ┌─────────────┴─────────────┐
+                 │                           │
+            On-Premises                  Azure VM
+                 │
               Hyper-V
-                │
-         ┌──────┴───────┐
-         │              │
-       DC01          Ubuntu01
-         │              │
-     AD / DNS       Containers
+                 │
+          ┌──────┴──────┐
+          │             │
+        DC01         Ubuntu01
+          │             │
+      AD / DNS      Containers
                         │
-                   Docker
+                      Docker
                         │
-                   Kubernetes
+                    Kubernetes
+```
 
 The target architecture will be implemented progressively through the separate projects defined in the main repository.
 
@@ -236,9 +244,10 @@ Microsoft Hyper-V was enabled on the Windows 10 Pro host and used as the virtual
 
 Two primary virtual machines were deployed:
 
+```text
 DC01
 Ubuntu01
-
+```
 The virtual machines communicate through the Hyper-V networking environment.
 
 ### Windows Server / DC01
@@ -251,9 +260,11 @@ DC01
 
 Final network configuration:
 
-IPv4 Address    : 192.168.1.10/24
-Default Gateway : 192.168.1.1
-DNS Server      : 192.168.1.10
+```text
+IPv4 Address     : 192.168.1.10/24
+Default Gateway  : 192.168.1.1
+DNS Server       : 192.168.1.10
+```
 
 
 DC01 provides:
@@ -270,19 +281,22 @@ DC01 provides:
 
 The Active Directory environment consists of:
 
+```text
 Forest            : Conettin.lab
 Domain            : Conettin.lab
 NetBIOS           : CONETTIN
 Domain Controller : DC01
+```
 
 Active Directory was validated using PowerShell commands including:
 
-powershell
+```powershell
 Get-ADDomain
 Get-ADForest
 Get-ADDomainController
 Get-Service NTDS
 Get-Service DNS
+```
 
 ### DNS
 
@@ -290,9 +304,10 @@ DC01 provides the internal DNS infrastructure for the lab.
 
 DNS zones and Active Directory DNS records were inspected using commands including:
 
-powershell
+```powershell
 Get-DnsServerZone
 Get-DnsServerResourceRecord -ZoneName "Conettin.lab"
+```
 
 Validated DNS records included:
 
@@ -305,12 +320,16 @@ Validated DNS records included:
 
 Active Directory LDAP service discovery was validated using:
 
+```text
 _ldap._tcp.dc._msdcs.conettin.lab
+```
 
 The LDAP service record correctly identifies:
 
+```text
 dc01.conettin.lab
 Port 389
+```
 
 ### Ubuntu Server
 
@@ -318,16 +337,20 @@ Ubuntu01 was deployed as the Linux infrastructure server.
 
 Final configuration:
 
-IPv4 Address    : 192.168.1.13/24
-Default Gateway : 192.168.1.1
-DNS Server      : 192.168.1.10
-SSH             : Enabled
+```text
+IPv4 Address     : 192.168.1.13/24
+Default Gateway  : 192.168.1.1
+DNS Server       : 192.168.1.10
+SSH              : Enabled
+```
 
 Network configuration is managed using Netplan.
 
 The reusable Netplan configuration is stored under:
 
+```text
 configs/ubuntu01/
+```
 
 _______________________________________________________________
 
@@ -361,6 +384,7 @@ As a result, Ubuntu01 could not correctly resolve the private `Conettin.lab` nam
 
 The issue was investigated from the network layer upward:
 
+```text
 Network Adapter
       ↓
 Interface State
@@ -382,24 +406,27 @@ DNS Server
 DNS Records
       ↓
 Active Directory Service Discovery
+```
 
 Windows networking was investigated using commands including:
 
-powershell
+```powershell
 Get-NetAdapter
 Get-NetIPConfiguration
 Get-NetIPInterface
 Get-NetIPAddress
 Get-NetRoute
 Get-DnsClientServerAddress
+```
 
 Linux networking was investigated using:
 
-bash
+```bash
 ip addr
 ip route
 ip neigh show
 resolvectl status
+```
 
 ### Root Cause
 
@@ -429,55 +456,61 @@ The Ubuntu Netplan configuration was backed up before modification.
 
 The updated configuration was validated and applied using:
 
-bash
+```bash
 sudo netplan generate
 sudo netplan apply
+```
 
 ### Final Validation
 
 DC01 networking was validated using:
 
-powershell
+```powershell
 Get-NetIPAddress
 Get-NetRoute
 Get-DnsClientServerAddress
-
+```
 
 Connectivity was validated using:
 
-powershell
+```powershell
 ping 192.168.1.1
 ping 192.168.1.13
+```
 
 DC01 DNS resolution was validated using:
 
-powershell
+```powershell
 Resolve-DnsName dc01.conettin.lab -Server 192.168.1.10
+```
 
 Active Directory LDAP service discovery was validated using:
 
-powershell
+```powershell
 Resolve-DnsName _ldap._tcp.dc._msdcs.conettin.lab `
   -Type SRV `
   -Server 192.168.1.10
+```
 
 Ubuntu01 DNS configuration was validated using:
 
-bash
+```bash
 resolvectl status
+```
 
 Internal DNS resolution was tested using:
 
-bash
+```bash
 nslookup dc01.conettin.lab
+```
 
 Hostname-based connectivity was tested using:
 
-bash
+```bash
 ping -c 4 dc01.conettin.lab
+```
 
 Final network and DNS validation completed successfully.
-
 _______________________________________________________________
 
 ## Infrastructure Validation and Automation
@@ -489,10 +522,11 @@ These scripts are part of Project 01 because they validate the infrastructure bu
 More advanced PowerShell automation is developed separately in Project 02.
 
 ### PowerShell
-
+```text
 scripts/powershell/
 ├── 01-Test-ADInfrastructure.ps1
 └── 02-Test-ADDS-DNS.ps1
+```
 
 #### 01-Test-ADInfrastructure.ps1
 
@@ -522,8 +556,10 @@ Provides additional Active Directory and DNS validation:
 
 ### Bash
 
+```text
 scripts/bash/
 └── 01-Test-Network.sh
+```
 
 The Ubuntu01 validation script checks:
 
@@ -538,11 +574,13 @@ The Ubuntu01 validation script checks:
 
 Final Bash validation produced:
 
+```text
 Gateway reachable: PASS
 DC01 reachable: PASS
 dc01.conettin.lab -> 192.168.1.10 : PASS
 Internal DNS query: PASS
 SSH service: RUNNING
+```
 
 _______________________________________________________________
 
@@ -550,6 +588,7 @@ _______________________________________________________________
 
 Each project follows an engineering workflow:
 
+```text
 Problem
    ↓
 Requirements
@@ -567,9 +606,11 @@ Monitoring
 Documentation
    ↓
 Lessons Learned
+```
 
 For Project 01, the practical troubleshooting workflow also demonstrated:
 
+```text
 Identify Problem
       ↓
 Inspect Network
@@ -587,7 +628,7 @@ Validate Services
 Automate Validation
       ↓
 Document Results
-
+```
 _______________________________________________________________
 
 ## Project Context
@@ -663,6 +704,7 @@ Markdown documentation is used as the primary technical explanation, while scree
 
 ### Project Structure
 
+```text
 01-Hybrid-Infrastructure-Lab/
 │
 ├── README.md
@@ -692,9 +734,11 @@ Markdown documentation is used as the primary technical explanation, while scree
 │
 └── screenshots/
     └── Implementation and validation evidence
+```
 
 ### Documentation Files
 
+```text
 docs/
 ├── 01-hyperv-foundation.md
 ├── 02-windows-server-dc01.md
@@ -702,19 +746,25 @@ docs/
 ├── 04-networking.md
 ├── 05-active-directory.md
 └── 06-dns.md
+```
 
 Configuration examples are stored under:
 
+```text
 configs/
+```
 
 Reusable validation scripts are stored under:
 
+```text
 scripts/
+```
 
 Architecture documentation is stored under:
 
+```text
 architecture/
-
+```
 
 _______________________________________________________________
 
@@ -759,11 +809,12 @@ Completed:
 
 Repository publication:
 
-- [ ] Final repository structure review
-- [ ] Add `.gitignore`
-- [ ] Initialize Git repository
-- [ ] Create initial commit
-- [ ] Publish repository to GitHub
+- [x] Final repository structure review
+- [x] Add `.gitignore`
+- [x] Initialize Git repository
+- [x] Create project commit
+- [x] Publish repository to GitHub
+- [x] Verify clean Git working tree
 
 
 _______________________________________________________________
@@ -799,6 +850,7 @@ This project demonstrated that infrastructure troubleshooting should begin with 
 
 An apparent DNS or Active Directory problem may actually originate from:
 
+```text
 Network Interface
       ↓
 IP Addressing
@@ -814,6 +866,7 @@ DNS Client
 DNS Server
       ↓
 Directory Services
+```
 
 The DC01 APIPA issue demonstrated the importance of validating IPv4 addressing and routing before investigating higher-level services.
 

@@ -1,9 +1,12 @@
 # Windows Server DC01 Deployment
 
+_______________________________________________________________
+
 ## Objective
 
-Deploy Windows Server 2025 as the primary Windows infrastructure
-server and prepare it for Active Directory Domain Services and DNS.
+Deploy Windows Server 2025 as the primary Windows infrastructure server and prepare it for Active Directory Domain Services and DNS.
+
+_______________________________________________________________
 
 ## Environment
 
@@ -15,17 +18,19 @@ server and prepare it for Active Directory Domain Services and DNS.
   - Active Directory Domain Services
   - DNS Server
 
+_______________________________________________________________
+
 ## Virtual Machine Deployment
 
 DC01 was created as a virtual machine on the Hyper-V host.
 
-The virtual machine was connected to the Hyper-V virtual network and
-prepared for Windows Server installation.
+The virtual machine was connected to the Hyper-V virtual network and prepared for Windows Server installation.
+
+_______________________________________________________________
 
 ## Windows Server Installation
 
-Windows Server 2025 installation was performed inside the DC01
-virtual machine.
+Windows Server 2025 installation was performed inside the DC01 virtual machine.
 
 The deployment process included:
 
@@ -37,16 +42,17 @@ The deployment process included:
 6. Completing the initial server setup.
 7. Performing the first login.
 
-After installation, Windows Server was ready for infrastructure
-configuration.
+After installation, Windows Server was ready for infrastructure configuration.
+
+_______________________________________________________________
 
 ## Server Role
 
-DC01 was designed as the core Windows infrastructure server for the
-lab.
+DC01 was designed as the core Windows infrastructure server for the lab.
 
 Its responsibilities include:
 
+```text
 DC01
  │
  ├── Active Directory Domain Services
@@ -55,55 +61,68 @@ DC01
  ├── LDAP
  ├── Kerberos
  └── Internal DNS
+```
 
-The Active Directory roles were installed later in the lab after
-the initial operating system and network configuration stages.
+The Active Directory roles were installed later in the lab after the initial operating system and network configuration stages.
+
+_______________________________________________________________
 
 ## Server Naming
 
-Before promoting the server to a Domain Controller, the Windows
-Server hostname was changed to:
+Before promoting the server to a Domain Controller, the Windows Server hostname was changed to:
 
 DC01
 
-Using a clear server naming convention makes infrastructure roles
-easier to identify and manage.
+Using a clear server naming convention makes infrastructure roles easier to identify and manage.
 
 In this lab:
 
+```text
 DC01
 │ │
 │ └── 01 = First server of this role
 │
 └──── DC = Domain Controller
+```
+
+### Deployment Evidence
+
+![Windows Server First Login](../screenshots/12-First-Login.PNG)
+_______________________________________________________________
 
 ## Network Dependency
 
-DC01 requires stable network configuration because Active Directory
-and DNS depend on consistent server addressing.
+DC01 requires stable network configuration because Active Directory and DNS depend on consistent server addressing.
 
-During later validation, the network configuration required
-additional troubleshooting before the Active Directory DNS
-environment became fully operational.
+During later validation, the network configuration required additional troubleshooting before the Active Directory DNS environment became fully operational.
 
 The final working network configuration became:
 
+```text
 IPv4 Address    : 192.168.1.10/24
 Default Gateway : 192.168.1.1
 DNS Server      : 192.168.1.10
+```
 
 Detailed network troubleshooting is documented separately in:
 
-docs/04-networking.md
+`docs/04-networking.md`
 
 DNS troubleshooting is documented in:
 
-docs/06-dns.md
+`docs/06-dns.md`
+
+### Network Configuration Evidence
+
+![DC01 IPv4 Configuration](../screenshots/64-DC01-IPv4-Configuration.PNG)
+
+![DC01 DNS Client Configuration](../screenshots/64-DC01-SetDnsClientServerAddress.PNG)
+
+_______________________________________________________________
 
 ## Validation
 
-After the operating system deployment, DC01 successfully booted and
-was available for further infrastructure configuration.
+After the operating system deployment, DC01 successfully booted and was available for further infrastructure configuration.
 
 Later validation confirmed that the server could operate with:
 
@@ -113,18 +132,27 @@ Later validation confirmed that the server could operate with:
 - Active Directory Domain Services
 - Internal DNS
 
+### Validation Evidence
+
+![DC01 Network Validation](../screenshots/65-DC01-GetNetIPaddress.PNG)
+
+![DC01 Connectivity Validation](../screenshots/65-DC01-Ping192.168.1.1-192.168.1.13.PNG)
+_______________________________________________________________
+
 ## Result
 
 Windows Server 2025 was successfully deployed as DC01.
 
-The server became the foundation for the Active Directory and DNS
-infrastructure implemented in later stages of the lab.
+The server became the foundation for the Active Directory and DNS infrastructure implemented in later stages of the lab.
+
+_______________________________________________________________
 
 ## Lessons Learned
 
 Infrastructure server deployment should separate the following
 layers:
 
+```text
 Virtual Machine
       ↓
 Operating System
@@ -136,11 +164,12 @@ Server Identity
 Infrastructure Roles
       ↓
 Service Validation
+```
 
-A Domain Controller should use predictable network configuration
-because identity and DNS services depend on stable addressing.
+A Domain Controller should use predictable network configuration because identity and DNS services depend on stable addressing.
+
+_______________________________________________________________
 
 ## Next Step
 
-Deploy Ubuntu01 and establish network connectivity between the
-Windows and Linux infrastructure.
+Deploy Ubuntu01 and establish network connectivity between the Windows and Linux infrastructure.

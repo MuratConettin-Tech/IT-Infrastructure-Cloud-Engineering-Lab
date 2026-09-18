@@ -1,10 +1,12 @@
 # Ubuntu Server Deployment
 
+_______________________________________________________________
+
 ## Objective
 
-Deploy Ubuntu Server as the Linux infrastructure server in the
-Hybrid Infrastructure Lab and prepare it for networking, remote
-administration and future container workloads.
+Deploy Ubuntu Server as the Linux infrastructure server in the Hybrid Infrastructure Lab and prepare it for networking, remote administration and future container workloads.
+
+_______________________________________________________________
 
 ## Environment
 
@@ -17,13 +19,13 @@ administration and future container workloads.
 - Internal DNS Server: `192.168.1.10`
 - Remote Administration: SSH
 
+_______________________________________________________________
+
 ## Virtual Machine Deployment
 
-Ubuntu01 was created as the second virtual machine in the Hyper-V
-environment.
+Ubuntu01 was created as the second virtual machine in the Hyper-V environment.
 
-During virtual machine creation, the following components were
-configured:
+During virtual machine creation, the following components were configured:
 
 1. Virtual machine generation
 2. Memory allocation
@@ -32,8 +34,9 @@ configured:
 5. Virtual storage
 6. Boot configuration
 
-Ubuntu Server was then installed and the initial system
-configuration was completed.
+Ubuntu Server was then installed and the initial system configuration was completed.
+
+_______________________________________________________________
 
 ## Ubuntu Server Installation
 
@@ -49,20 +52,23 @@ The installation process included:
 - System installation
 - First login
 
-After installation, Ubuntu01 was ready for network and remote
-administration configuration.
+After installation, Ubuntu01 was ready for network and remote administration configuration.
+
+_______________________________________________________________
 
 ## Initial Network Validation
 
 The network interfaces and assigned addresses were inspected using:
 
-bash
+```bash
 ip addr
+```
 
 Routing information was inspected using:
 
-bash
+```bash
 ip route
+```
 
 These commands were used to understand:
 
@@ -72,16 +78,21 @@ These commands were used to understand:
 - Default gateway
 - Routing path
 
+_______________________________________________________________
+
 ## Static IPv4 Configuration
 
 Ubuntu01 was configured with a static IPv4 address:
 
+```text
 IPv4 Address    : 192.168.1.13/24
 Default Gateway : 192.168.1.1
 Interface       : eth0
+```
 
-Static addressing provides predictable network connectivity for
-infrastructure servers.
+Static addressing provides predictable network connectivity for infrastructure servers.
+
+_______________________________________________________________
 
 ## Netplan Configuration
 
@@ -89,8 +100,9 @@ Ubuntu Server networking was managed using Netplan.
 
 The available Netplan configuration was inspected using:
 
-bash
+```bash
 ls -l /etc/netplan/
+```
 
 The active configuration file was:
 
@@ -98,12 +110,13 @@ The active configuration file was:
 
 The configuration was inspected using:
 
-bash
+```bash
 sudo cat /etc/netplan/00-installer-config.yaml
+```
 
 The initial configuration contained:
 
-yaml
+```yaml
 network:
   version: 2
   ethernets:
@@ -118,88 +131,106 @@ network:
         addresses:
           - 8.8.8.8
           - 1.1.1.1
+```
 
 At this stage, Ubuntu01 used public DNS resolvers.
 
-This configuration provided external DNS resolution but could not
-resolve the private Active Directory namespace.
+This configuration provided external DNS resolution but could not resolve the private Active Directory namespace.
+
+### Netplan Configuration Evidence
+
+![Ubuntu01 Netplan Internal DNS](../screenshots/67-Ubuntu01-Netplan-Internal-DNS.PNG)
+_______________________________________________________________
 
 ## SSH Remote Administration
 
-SSH was enabled to provide remote command-line administration of
-Ubuntu01.
+SSH was enabled to provide remote command-line administration of Ubuntu01.
 
 SSH service status was validated using:
 
-bash
+```bash
 sudo systemctl status ssh
+```
 
 Remote connectivity from DC01 to Ubuntu01 was also tested.
 
-This allowed Ubuntu01 to be managed remotely instead of relying
-only on the Hyper-V console.
+This allowed Ubuntu01 to be managed remotely instead of relying only on the Hyper-V console.
+
+
+### SSH connection
+
+![Ubuntu01 SSH](../screenshots/70-Ubuntu01-Bash-Infrastructure-Validation-01.PNG)
+
+_______________________________________________________________
 
 ## System Updates
 
-The Ubuntu package repositories and installed packages were updated
-during the initial server preparation.
+The Ubuntu package repositories and installed packages were updated during the initial server preparation.
 
 The package upgrade process was performed using:
 
-bash
+```bash
 sudo apt upgrade
+```
 
-This ensured that the server had current package updates before
-additional infrastructure services were deployed.
+This ensured that the server had current package updates before additional infrastructure services were deployed.
+
+_______________________________________________________________
 
 ## Internal DNS Integration
 
-After DC01 networking and DNS were corrected, Ubuntu01 was changed
-to use the internal Active Directory DNS server.
+After DC01 networking and DNS were corrected, Ubuntu01 was changed to use the internal Active Directory DNS server.
 
-Before modifying the configuration, a backup of the Netplan file
-was created:
+Before modifying the configuration, a backup of the Netplan file was created:
 
-bash
+```bash
 sudo cp /etc/netplan/00-installer-config.yaml \
 /etc/netplan/00-installer-config.yaml.bak
+```
 
 The Netplan configuration was edited using:
 
-bash
+```bash
 sudo nano /etc/netplan/00-installer-config.yaml
+```
 
 The DNS configuration was changed from:
 
-yaml
+```yaml
 nameservers:
   addresses:
     - 8.8.8.8
     - 1.1.1.1
-
+```
 to:
 
-yaml
+```yaml
 nameservers:
   addresses:
     - 192.168.1.10
+```
 
 The configuration was validated before being applied:
 
-bash
+```bash
 sudo netplan generate
+```
 
 The new network configuration was then applied:
 
-bash
+```bash
 sudo netplan apply
+```
+
+_______________________________________________________________
 
 ## DNS Validation
 
 The active resolver configuration was inspected using:
 
-bash
+```bash
 resolvectl status
+```
 
 The active DNS server was confirmed as:
 
@@ -207,8 +238,9 @@ The active DNS server was confirmed as:
 
 Internal DNS resolution was tested using:
 
-bash
+```bash
 nslookup dc01.conettin.lab
+```
 
 The query successfully resolved:
 
@@ -216,21 +248,28 @@ dc01.conettin.lab → 192.168.1.10
 
 Hostname-based connectivity was then tested:
 
-bash
+```bash
 ping -c 4 dc01.conettin.lab
+```
 
 All four packets were successfully received with 0% packet loss.
+
+_______________________________________________________________
 
 ## Final Network Configuration
 
 Ubuntu01 currently uses:
 
+```text
 Hostname        : Ubuntu01
 Interface       : eth0
 IPv4 Address    : 192.168.1.13/24
 Default Gateway : 192.168.1.1
 DNS Server      : 192.168.1.10
 Remote Access   : SSH
+```
+
+_______________________________________________________________
 
 ## Validation
 
@@ -246,27 +285,27 @@ The following components were successfully validated:
 - DC01 hostname resolution
 - DC01 network connectivity
 
+_______________________________________________________________
+
 ## Result
 
-Ubuntu01 is operational as the Linux infrastructure server in the
-lab.
+Ubuntu01 is operational as the Linux infrastructure server in the lab.
 
-The server has static IPv4 networking, SSH remote administration
-and internal DNS resolution through DC01.
+The server has static IPv4 networking, SSH remote administration and internal DNS resolution through DC01.
 
-Ubuntu01 is ready for future Linux infrastructure and container
-workloads.
+Ubuntu01 is ready for future Linux infrastructure and container workloads.
+
+_______________________________________________________________
 
 ## Lessons Learned
 
-Linux infrastructure servers should use predictable network
-configuration.
+Linux infrastructure servers should use predictable network configuration.
 
-Netplan provides declarative network configuration on Ubuntu
-Server.
+Netplan provides declarative network configuration on Ubuntu Server.
 
 Network configuration should be validated before applying changes:
 
+```text
 Edit Configuration
         ↓
 netplan generate
@@ -276,12 +315,12 @@ netplan apply
 resolvectl status
         ↓
 DNS / Connectivity Tests
+```
 
-Internal systems that need to resolve an Active Directory namespace
-must use the internal DNS infrastructure instead of public DNS
-resolvers.
+Internal systems that need to resolve an Active Directory namespace must use the internal DNS infrastructure instead of public DNS resolvers.
+
+_______________________________________________________________
 
 ## Next Step
 
-Complete infrastructure validation and prepare Ubuntu01 for future
-container workloads.
+Complete infrastructure validation and prepare Ubuntu01 for future container workloads.

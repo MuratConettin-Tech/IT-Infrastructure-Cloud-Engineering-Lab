@@ -148,6 +148,7 @@ _______________________________________________________________
 
 This repository evolves towards a fully integrated enterprise-style platform:
 
+```text
 On-Premises
      ↓
 Hybrid Infrastructure
@@ -167,7 +168,7 @@ CI/CD
 Observability
      ↓
 SRE
-
+```
 
 The final architecture will combine:
 
@@ -203,6 +204,7 @@ _______________________________________________________________
 
 ## Repository Structure
 
+```text
 IT-Infrastructure-Cloud-Engineering-Lab/
 │
 ├── 01-Hybrid-Infrastructure-Lab/
@@ -216,6 +218,7 @@ IT-Infrastructure-Cloud-Engineering-Lab/
 ├── 09-Monitoring-Observability/
 ├── 10-SRE-Reliability/
 └── 11-Enterprise-Capstone/
+```
 _______________________________________________________________
 
 Each project contains its own documentation, architecture, configuration examples, scripts and implementation evidence where appropriate.
@@ -226,6 +229,7 @@ ______________________________________________________________
 
 Each project follows an engineering workflow:
 
+```text
 Problem
    ↓
 Requirements
@@ -243,6 +247,7 @@ Monitoring
 Documentation
    ↓
 Lessons Learned
+```
 
 Projects focus on understanding why a technology is used, how it integrates with other infrastructure components, and how it can be operated reliably in production.
 
@@ -295,6 +300,7 @@ _______________________________________________________________
 
 By completing this roadmap, the objective is to demonstrate practical capability across:
 
+```text
 Infrastructure
       ↓
 Cloud
@@ -314,6 +320,7 @@ CI/CD
 Observability
       ↓
 SRE
+```
 
 The final goal is to combine these technologies into an integrated enterprise-style platform rather than treating each technology as an isolated subject.
 _______________________________________________________________
@@ -324,6 +331,7 @@ _______________________________________________________________
 
 Current environment:
 
+```text
 DC01
 ├── Windows Server 2025
 ├── 192.168.1.10/24
@@ -336,6 +344,7 @@ Ubuntu01
 ├── 192.168.1.13/24
 ├── DNS → 192.168.1.10
 └── SSH
+```
 
 Completed:
 
@@ -365,6 +374,7 @@ This repository is continuously evolving as new infrastructure projects are desi
 
 Current focus:
 
+```text
 Project 01
 Hybrid Infrastructure Lab
         ↓
@@ -373,3 +383,4 @@ Final Validation
 Git / GitHub
         ↓
 Project 02+
+```
