@@ -1,0 +1,15 @@
+{
+    "domain": "conettin.lab",
+    "domainController": {
+        "name": "dc01",
+        "fqdn": "dc01.conettin.lab",
+        "ip": "192.168.1.10"
+    },
+    "ubuntuServer": {
+        "name": "ubuntu01",
+        "ip": "192.168.1.13"
+    },
+    "network": {
+        "gateway": "192.168.1.1"
+    }
+}

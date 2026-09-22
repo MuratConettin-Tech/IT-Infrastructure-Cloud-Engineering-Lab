@@ -1,0 +1,5 @@
+﻿"Timestamp","Test","Target","Status"
+"2026-09-22 16:03:28","Default Gateway","192.168.1.1","PASS"
+"2026-09-22 16:03:29","DC01 Connectivity","192.168.1.10","PASS"
+"2026-09-22 16:03:30","Ubuntu01 Connectivity","192.168.1.13","PASS"
+"2026-09-22 16:03:30","Internal DNS","dc01.conettin.lab","PASS"
